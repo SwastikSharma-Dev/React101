@@ -1,3 +1,17 @@
+# React-101 by Swastik Sharma
+
+## Swastik Sharma
+
+### Github: https://github.com/SwastikSharma-Dev
+### LinkedIn: https://www.linkedin.com/in/swastik7sharma
+### Replit: https://replit.com/@SwastikSharma-Dev
+### HashNode: https://swastiksharma.hashnode.dev/
+### Dev.io: https://dev.to/swastiksharma-dev
+### Medium: https://medium.com/@swastiksharma.dev
+
+
+
+
 ## Introduction
 
 
@@ -5,6 +19,10 @@
 * HTML
 * CSS
 * JAVASCRIPT
+
+### Important Links
+1. Github Repo: https://github.com/facebook/react
+2. Documentations: https://react.dev/
 
 ### What is React?
 > React is the **library** for web and native user interfaces. Build user interfaces out of individual pieces called components written in JavaScript. It was developed by *Meta (formely Facebook)*. Now, it is an open-source library. One of the biggest problems of inserting elements into the DOM with JavaScript is that the code is not reusable. For example, if you want to insert the same button into the page, but with different background colors, you have to create the element twice in JavaScript.React was developed to solve this problem by making the process of creating web apps much more organized and intuitive. **React is used to make Complex Front-End.**
@@ -41,6 +59,9 @@
 * After React (due to problem like: no SEO, no Routing, browser rendering of JS)
     - Frameworks (Next.js, Gatsby, Remix)
 
+
+
+
 ## Getting Started
 
 ### Building Project
@@ -66,6 +87,10 @@
     ```
     On running this in Terminal, will create a **Build** folder in the Project Directory, which will contain all the static assets, javascript written by React. In Production, this build folder is actually used.
 
+
+
+
+
 ## Creating Project with Vite
 
 ### What is Vite?
@@ -86,6 +111,10 @@
     npm run dev
     ```
     This will navigate you to the Project Folder. Since **"node_modules"** folder, that was present in 01_basic_react will not be present here. So we install node modeules by second command. If we open **"package.json"** of this folder, we will see we have less dependencies (tests is not there, etc.). It will have different Scripts too. The third command is to run *"dev"* script only which is basically to start the project on a localhost.
+
+
+
+
 
 ## Understanding Flow and Structure
 
@@ -150,6 +179,20 @@
     **What is .jsx? How it is different from .js?**
 
     JSX is a syntax extension for JavaScript that allows you to write HTML-like code within JavaScript. More or less, they work same; no major difference but .jsx is basically used for custom tag. In Vite, it has a convention to use .jsx for custom tags, otherwise it won't work and there is no such rule in basic react.
+    Since React directly don't understand HTML, it uses a bundler (Vite also uses a bundler) that converts HTML into React-understanadable syntax/format, called parsing, simply a conversion to a tree format. For example:
+    ```html
+    <a href="https://www.google.com">Click Here to go to Google.</a>
+    ```
+    > Above is an HTML format which will be converted to below given format by a bundler. This is just an example to make things clear. The syntax, key, value, properties might not be accurate. When we pass this object directly into ".render()" it will not work. But saving above HTML Tag to an object and passing that argument into ".render()" will work completely fine. This is because, we might have given name to keys, etc. wrong. If given correct, it will work. But we need not to remember those structures as BUNDLER is doing this for us.
+    ```js
+    {
+    type: 'a',
+    props: {
+        href: 'https://www.google.com',
+    },
+    children: 'Click Here to go to Google.'
+    }
+    ```
 
     **Custom Tags Conventions**
 
@@ -165,6 +208,89 @@
 
 > **NOTE :** In any file where HTML is exported the file extension must be **.jsx** (Best Practice).
 
+4. We can directly render an element by passing it as an argument in ".render()" method. To create such element, React has a method ".createElement()" that takes arguments in following order:
+
+    1. Tag, say 'a'
+    2. An Object for Properties, say {href='https://www.google.com', target='_blank'}
+    3. The Text to Display i.e. innerHTML, say 'Click here to Go to Google'
+
+   For Example:
+   ```js
+   const testElement = React.createElement('a',{href: 'https://www.google.com'}, 'testElement->Google');
+   ReactDOM.createRoot(document.getElementById('root')).render(
+        testElement
+   )
+   ```
+5. To use varibales in React i.e. ".jsx" files we will enclose variable name, wherever using, inside curly braces "{}". For example:
+
+    ```js
+    // In Welocme.jsx
+    function Welcome()
+    {
+        const username = 'Swastik';
+
+        return(
+            <h1>Hello {username} !</h1>
+        )
+    }
+    export default Welcome;
+    ```
+    ```js
+    // In Main.jsx
+    import React from 'react'
+    import ReactDOM from 'react-dom/client'
+    import Welcome from "./Welcome"
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+    <Welcome />
+    )
+    ```
+    > **INTERVIEW QUESTION:** Since "{}" curly braces means JavaScript here, can we write ``{if(true) console.log(5)}`` ? <br/>
+    >No. "{}" means **Evaluated Expression** but this ``{if(true) console.log(5)}`` is just an **expression**. Means we only write evaluated expressions here, i.e. the final outcome but not the logic. <br/>
+    > The reason: at the end of the day, this element get converted into React readable format (with the help of bundler) i.e. in a form of tree-object, as discussed above. So it is not possible to write an expression into an object but we can write an evaluated expression (that is merely a value), into object.
 
 
-    
+
+
+
+## Creating Own React Library
+
+### How the Rendering Works? <u>***OR***</u> How React Renders the Elements?
+
+1. Create a folder "01_custom_react" for the project. Create "index.html" and "custom_react.js" file in it.
+2. Initialze the HTML file with boilerplate. And give the script as "custom_react.js" file.
+3. HTML file's body have only one element "< div >" with id of your choice(here, **"imp"**). (Will call it "main container" for reference)
+4. In JS file, you may create a custom tag (NOT COMPONENT) or a tag directly, and select this above created element with DOM. For example (a custom anchor tag):
+    ```js
+    const custom_element = {
+    custom_type: 'a', // Will be creating an anchor tag
+    custom_props: {
+        href: 'https://www.google.com',
+        custom_textToDisplay: 'Click This Custom Anchor Tag to go to Google', // Not a good practise to name like this.
+        the_link_to_go: 'https://www.google.com',
+    },
+    random_prop_of_no_use: 'Hello'
+    }
+    ```
+5. (MOST IMPORTANT) Now create a function, say **"custom_render"**, which will take two paramters, one is the Main Container Tag itself and the other is the custom tag or tag created.
+6. In the function, we will be creating a DOM element, for instance:
+    ```js
+    const created_custom_element = document.createElement(element.custom_type);
+    ```
+7. Now we can update ".innerHTML" or ".setAttributes" to complete the element. Example:
+    ```js
+    created_custom_element.innerHTML = element.custom_props.custom_textToDisplay;
+    for(const current_prop in element.custom_props)
+    {
+        created_custom_element.setAttribute(current_prop, element.custom_props[current_prop]);
+    }
+    ```
+8. Later we will append this as child to the Main Container Tag.
+    ```js
+    container.appendChild(created_custom_element)
+    ```
+9. We can now just create custom HTML and pass it into the function as argument.
+
+> **NOTE :** This is how the React works internally and how we can create custom react library. Just a Basic Example.
+
+> **FACT :** We might directly run the function instead of calling its Tag (the custom tag we created via function and exported). That will also work, but not recommended, because of Optimisation Problem and Code Conventions. For example: using **"MyApp()"** instead of **"< MyApp />"**
