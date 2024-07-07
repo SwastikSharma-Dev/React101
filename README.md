@@ -98,4 +98,73 @@
 1. (V) Firstly, delete every file except **"App.jsx"** and **"main.jsx"** in "**src**" folder.
 2. (V) Remove unnecessary imports form both files.
 
-### 
+### Understanding Files
+
+1. **.gitignore** contains the files which will not pe pushed to github when we push. Due to Safety Concerns.
+2. **package.json** contains *dependencies* and *scripts*
+3. **package-lock.json** is used to lock the dependencies for a stable verison. More information later.
+4. **README.md** is absic readme file which contains details and other importnat informations about Project and version updates, if any.
+5. **build** folder is used for sending project into Production. Will be discussed later.
+6. **node_modules** contains important *node* files for project creation and execution.
+7. **public** folder contains:
+    - static resources like images, videos, etc.
+    - **manifest.json** is used for reading Meta tags in case of Mobile Devices. (Not necessary)
+    - **robots.txt** is for Search Engines. (Not necessary)
+    - **index.html** (Most Important). The Webpages will be load by this HTML file only.
+        > React is a Single Page Application.
+
+
+### Working
+
+1. We will see an "import" statement in "index.js", i.e.,
+    ```js
+    import ReactDOM from 'react-dom/client';
+    ```
+    This Statement imports "ReactDOM", i.e. its own personal DOM into the file. Yes, React creates its own DOM.
+2. ReactDOM has method "createRoot". You will see following in "index.js"
+    ```js
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    ```
+    By basic "getElementbyId" function we get element which has id=root i.e. the only tag,a < div >, in body of "index.html" and this will be passed as an argument to the createRoot method. And we will store it in a const variable named "root".
+3. Next we will see:
+    ```js
+    root.render
+    (
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    );
+    ```
+    As normal(browser) DOM, also just renders the page. This is also used to render only. It will render a Tag "< App />". But as we know, HTML do not have any such tag. So what is this? This is actually a custom tag. React gives us ability to create custom tags.
+    StrictMode is actually used in Development for Optimisation puroposes. Can be removed as of now.
+    Coming to "< App />" Tag; Going to its definition i.e. in "App.js", we come to know that it is merely a function that returns some HTML. And later in the file we export that. And we are rendering that tag only in "index.js". This actually provides programming capabilities to HTML, and used to create complex UI.
+    **These Custom Tags are called COMPONENTS**
+
+    **But we have not load any JavaScript files anywhere in the "index.html" so how "index.js" get loaded automatically?**
+
+    Actually, when we see "package.json" we come to know that it has a *dependency* named "Scripts", which actually loads the JavaScript for us. This was the case with normal React Project. But coming to Vite Project, we see that "package.json" do not have any Scripts. In case of Vite, it actually loads javascript i.e. < Script > Tag in "index.html" itself i.e. "src/main.jsx".
+    The internal working of Vote is almost same as the normal React but it is comparitively lightweight.
+    And there are minor differences we might notice, like, in rendering in normal React, we store the "root" in a variable and then apply render method on that variable. But in case of Vite, it just directly apply method to render without saving it into a variable.
+    This is not necesssary to have only "App" as the only custom tag but we can have as many as we want.
+
+    **What is .jsx? How it is different from .js?**
+
+    JSX is a syntax extension for JavaScript that allows you to write HTML-like code within JavaScript. More or less, they work same; no major difference but .jsx is basically used for custom tag. In Vite, it has a convention to use .jsx for custom tags, otherwise it won't work and there is no such rule in basic react.
+
+    **Custom Tags Conventions**
+
+    In Vite :
+    - **.jsx** must be the File Extension for the Custom Tag File.
+    - Function Name and Tag Name must begin with Capital Letters.
+    - You can export atmost one element. To export multiple wrap them in a single element. We may use "div" tag, but best practise is to use "Fragment" i.e. " <> </> " Tags.
+
+    In Basic React:
+    - File extension can be any **.js** or **.jsx**.
+    - Function Name and Tag Name must begin with Capital Letters. Won't show error but won't run too.
+    - You can export atmost one element. To export multiple wrap them in a single element. We may use "div" tag, but best practise is to use "Fragment" i.e. " <> </> " Tags.
+
+> **NOTE :** In any file where HTML is exported the file extension must be **.jsx** (Best Practice).
+
+
+
+    
