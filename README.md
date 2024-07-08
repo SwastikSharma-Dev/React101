@@ -294,3 +294,44 @@
 > **NOTE :** This is how the React works internally and how we can create custom react library. Just a Basic Example.
 
 > **FACT :** We might directly run the function instead of calling its Tag (the custom tag we created via function and exported). That will also work, but not recommended, because of Optimisation Problem and Code Conventions. For example: using **"MyApp()"** instead of **"< MyApp />"**
+
+> **FACT :** We need not to call "React" in every .jsx file for Tree Parsing. It will be automatically done by PABBLE.
+
+
+
+
+## Hooks
+
+### What are Hooks in React?
+
+> In React, a Hook is a special function that allows you to "hook into" React features within functional components. These features primarily include state management and side effects, which were previously only accessible in class components.  Hooks don't work inside classes — they let you use React without classes.
+
+> Simply, Hooks are the methods for easy sync of variable state with UI, the main purpose of React. On updation of a variable, it was needed to be updated everywhere, which in case of Javscript was bit difficult as we need to write code for every location. But here, "React" as name suggests, it react to varibale state change and it will propagate change to every location in UI wherever the varibale is used.
+
+**"useState" :** This is a hook. To use it must be imported as follows:
+```js
+import { useState } from "react"
+```
+
+It is used to update a variable's value and reflect/update everywhere in the DOM/UI.
+It returns an array of two element. First element is the variable itself, and second object is a function that takes an argument i.e. the new value of the variable to which it should be updated.
+
+```js
+let [no_of_mangoes, setNo_of_Mangoes] = useState(10) // Initially 10 Mangoes
+
+const addMango = () => {
+
+    setNo_of_Mangoes(no_of_mangoes + 1)
+            
+}
+const removeMango = () => {
+
+    setNo_of_Mangoes(no_of_mangoes - 1)
+            
+}
+```
+
+This will update and display new value of variable "no_of_mangoes" everywhere in the UI, whenever the function is called.
+
+
+
