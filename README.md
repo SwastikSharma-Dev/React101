@@ -300,7 +300,7 @@
 
 
 
-## Hooks
+## Hooks, Fiber and VirtualDOM
 
 ### What are Hooks in React?
 
@@ -333,5 +333,37 @@ const removeMango = () => {
 
 This will update and display new value of variable "no_of_mangoes" everywhere in the UI, whenever the function is called.
 
+### Fiber and VirtualDOM
+
+Reference Link: https://github.com/acdlite/react-fiber-architecture
+
+Firstly, we will learn "how the React updates so fast everywhere in the UI?". React actually coverts our document to be rendered in form a object tree (called tree parsing), and compares it with the browser's DOM. For any change it will update the browser DOM tree to our tree. This compasrison process is called **"Reconciliation"**.
+
+But there still exists problems like:
+
+1. Optimization : For every small update it will rerender the whole DOM, which is not optimal. Possible solution is to wait and render multiple changes combined. But how will React know how long it has to wait or if there any other change is coming?
+
+2. Smoothness : If there are multiple updates and for every update DOM is reloaded, it won't be smooth. the Animations won't be proper and working.
+
+3. Priority & Scalability : For multiple changes, how React will decide which to propogate first or wait for other change to let another change happen?
+
+To counter all this problem, React developers came up with "FIBER".
+
+**React Fiber** is a core React algorithm that was introduced after some time of release of React. It was under research till then. Instead of rendering whole DOM again, it just renders the specific part with changes only. It can wait to cluster multiple changes to propagate together. It can also prioritise changes i.e. Scheduling.
+
+The key points are:
+
+- In a UI, it's not necessary for every update to be applied immediately; in fact, doing so can be wasteful, causing frames to drop and degrading the user experience.
+- Different types of updates have different priorities — an animation update needs to complete more quickly than, say, an update from a data store.
+- A push-based approach requires the app (you, the programmer) to decide how to schedule work. A pull-based approach allows the framework (React) to be smart and make those decisions for you.
+
+We've established that a primary goal of Fiber is to enable React to take advantage of scheduling. Specifically, we need to be able to
+
+- pause work and come back to it later.
+- assign priority to different types of work.
+- reuse previously completed work.
+- abort work if it's no longer needed.
+
+> **NOTE :** Dont't forget to check the summary at https://github.com/acdlite/react-fiber-architecture
 
 
