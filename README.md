@@ -71,8 +71,8 @@
     npx create-react-app 01_basic_react
     ```
      Here *"01_basic_react"* is the name of the Project you want. **"npx"** stands for **"Node Package Executer"**.
-3. It will contain **"package.json"** file, whre we can see various scripts like: *start, build, test*.
-4. To get a live priew of project in browser i.e. to start it, first navigate to your project directory in terminal and run:
+3. It will contain **"package.json"** file, where we can see various scripts like: *start, build, test*.
+4. To get a live preview of project in browser i.e. to start it, first navigate to your project directory in terminal and run:
     ```sh
     npm run start
     ```
@@ -81,7 +81,7 @@
     npm start
     ```
     Above one is preffered. The difference and reason will be stated later.
-    This will start your project on a laocalhost.
+    This will start your project on a localhost.
 5.  ```sh
     npm run build
     ```
@@ -365,5 +365,108 @@ We've established that a primary goal of Fiber is to enable React to take advant
 - abort work if it's no longer needed.
 
 > **NOTE :** Dont't forget to check the summary at https://github.com/acdlite/react-fiber-architecture
+
+> **"INTERVIEW QUESTION :"** https://www.youtube.com/watch?v=FxgM9k1rg0Q&t=13,740s FOR THE TIME BEING.
+
+
+## Props and Tailwind
+
+### Tailwind - https://github.com/SwastikSharma-Dev/tailwind
+
+> **NOTE :** Don't forget to Checkout my above mentioned Repository for Tailwind.
+
+To create a Vite React project having Tailwind follow the given steps:
+
+```sh
+npm create vite@latest
+# Project Name: 02_props_tailwind_project
+# Framework: React
+# Varaint: JavaScript
+cd 03_props_tailwind_project
+npm install
+npm run dev
+# Now we will install Tailwind Dependencies:
+npm install -D tailwindcss postcss autoprefixer
+# Now we will initiate Tailwind into this project
+npx tailwindcss init -p
+```
+
+References: https://tailwindcss.com/docs/guides/vite
+
+Here, firstly, we have created a Vite Project as earlier. Later, we installed Tailwind Dependencies which can be later seen in "package.json" files. **"-D"** means "Development" i.e. dependencies that wiill be used in development not production. The ``npx tailwindcss init -p`` command will generate a "tailwind.config.js" file.
+Go to that file and make changes as follows:
+
+```js
+content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+```
+Now in "src/index.css" do the following imports:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+For reasons, go to README file of my Repository: https://github.com/SwastikSharma-Dev/tailwind
+
+> **NOTE :** Every tag must be cloasing tag. Even image also.
+
+### Props
+
+Props are simply the arguments that can be passed to Components (Custom Tags) to customise according to our need. Components can be thought of a template that can be modified by inputs called props.
+
+There are two methods:
+
+1. Giving parameter as **"props"** itself in function definition and accessing all the arguments passed by considering props as an object and accessing the arguments as its parts using "period" i.e. **(.)**.
+
+```js
+// In App.jsx; passing arguments into the Component "Card"
+    < >
+      <h1 className='bg-orange-400 text-black p-4 rounded-xl mb-4'>Swastik ViteReact+Tailwind</h1>
+      <div className='flex space-x-4'>
+      <Card product="Macbook" button="checkout now"/>
+      <Card product="Windows Laptop" button="buy now"/>
+      </div>
+    </>
+```
+
+```js
+// In Card.jsx
+function Card(props) {
+  return (
+    <h1>{props.product}</h1>
+    <button>{props.button}</button>
+  )
+}
+```
+
+2. Handling every parameter in function definition Explictly. Here, in this case, we can give DEFAULT value as well.
+
+```js
+// In App.jsx
+    < >
+      <h1 className='bg-orange-400 text-black p-4 rounded-xl mb-4'>Swastik ViteReact+Tailwind</h1>
+      <div className='flex space-x-4'>
+      <Card productName="Macbook" buttonName="checkout now"/>
+      <Card productName="Windows Laptop" buttonName="buy now"/>
+      <Card /> {/*This third Card Tag will take default value itself.*/}
+      </div>
+    </>
+  )
+}
+```
+
+```js
+// In Card.jsx
+function Card({productName = 'Deafult Laptop', buttonName = 'Click Me!'}) {
+return (
+    <h1>{productName}</h1>
+    <button>{buttonName}</button>
+  )
+}
+```
 
 
