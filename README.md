@@ -308,30 +308,66 @@
 
 > Simply, Hooks are the methods for easy sync of variable state with UI, the main purpose of React. On updation of a variable, it was needed to be updated everywhere, which in case of Javscript was bit difficult as we need to write code for every location. But here, "React" as name suggests, it react to varibale state change and it will propagate change to every location in UI wherever the varibale is used.
 
-**"useState" :** This is a hook. To use it must be imported as follows:
-```js
-import { useState } from "react"
-```
+1. **"useState" :** This is a hook. To use it must be imported as follows:
+    ```js
+    import { useState } from "react"
+    ```
 
-It is used to update a variable's value and reflect/update everywhere in the DOM/UI.
-It returns an array of two element. First element is the variable itself, and second object is a function that takes an argument i.e. the new value of the variable to which it should be updated.
+    It is used to update a variable's value and reflect/update everywhere in the DOM/UI.
+    It returns an array of two element. First element is the variable itself, and second object is a setter function that takes an argument i.e. the new value of the variable to which it should be updated.
 
-```js
-let [no_of_mangoes, setNo_of_Mangoes] = useState(10) // Initially 10 Mangoes
+    ```js
+    let [no_of_mangoes, setNo_of_Mangoes] = useState(10) // Initially 10 Mangoes
 
-const addMango = () => {
+    const addMango = () => {
 
-    setNo_of_Mangoes(no_of_mangoes + 1)
-            
-}
-const removeMango = () => {
+        setNo_of_Mangoes(no_of_mangoes + 1)
+                
+    }
+    const removeMango = () => {
 
-    setNo_of_Mangoes(no_of_mangoes - 1)
-            
-}
-```
+        setNo_of_Mangoes(no_of_mangoes - 1)
+                
+    }
+    ```
 
-This will update and display new value of variable "no_of_mangoes" everywhere in the UI, whenever the function is called.
+    This will update and display new value of variable "no_of_mangoes" everywhere in the UI, whenever the function is called.
+
+    Reference: https://react.dev/reference/react/useState
+
+2. **"useCallback :"** is a React Hook that lets you cache a function definition between re-renders. This is generally used for optimization purpose. Simply, it will keep the function into the cache instead of loading it from storage everytime.
+
+    ```js
+    const cachedFn = useCallback(fn, dependencies)
+    ```
+
+    The first parameter is the function itself and second parameter is an array of the varibales, function, etc. on whose execution or updation, the function should be called.
+
+    Reference: https://react.dev/reference/react/useCallback
+
+3. **"useEffect :"**  is a React Hook that lets you synchronize a component with an external system.
+
+    ```js
+    useEffect(setup, dependencies)
+    ```
+
+    Parameters:
+
+    - setup: The function with your Effect’s logic. Your setup function may also optionally return a cleanup function. When your component is added to the DOM, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. After your component is removed from the DOM, React will run your cleanup function.
+
+    - (**optional**) dependencies: The list of all reactive values referenced inside of the setup code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If you omit this argument, your Effect will re-run after every re-render of the component.
+
+    Reference: https://react.dev/reference/react/useEffect
+
+4. **"useRef :"** is a React Hook that lets you reference a value that’s not needed for rendering. Simply, used to take reference of some element.
+
+    ```js
+    const ref = useRef(initialValue)
+    // If no Initial Value, give **null**
+    ```
+
+
+    Reference: https://react.dev/reference/react/useRef
 
 ### Fiber and VirtualDOM
 
