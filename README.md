@@ -1,4 +1,4 @@
-# React-101 by Swastik Sharma
+# React-101 by Swastik Sharma (Not to be used for further publishing and distribution without permission.)
 
 ## Swastik Sharma
 
